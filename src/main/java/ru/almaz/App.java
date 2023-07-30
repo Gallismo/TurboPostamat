@@ -13,6 +13,7 @@ public class App {
 
     public App() throws FileNotFoundException {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("list.txt"));
         int ret = fileChooser.showDialog(null, "Открыть файл");
 
         if (ret == JFileChooser.APPROVE_OPTION) {
@@ -23,6 +24,8 @@ public class App {
         }
 
         if (parsedNames.isEmpty()) throw new EmptyListException("Список отправлений пуст!");
+
+        System.out.println("Количество отправлений: " + parsedNames.size());
     }
 
     public void findOrNot(String nameToFind) throws InterruptedException {
@@ -30,6 +33,7 @@ public class App {
         if (founded) {
             System.out.println("Отправление присутсвует в списке!");
             parsedNames.remove(nameToFind);
+            System.out.println("Осталось: " + parsedNames.size());
 
             if (parsedNames.isEmpty()) {
                 System.out.println("Список закончился!");
